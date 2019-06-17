@@ -9,8 +9,8 @@
 
 
     <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/edt_url" android:layout_marginTop="8dp"
@@ -19,21 +19,21 @@
     <Button
             android:text="IR"
             android:layout_width="45dp"
-            android:layout_height="35dp"
+            android:layout_height="50dp"
             android:id="@+id/btn_ir"
             app:layout_constraintEnd_toStartOf="@+id/imageView"
             android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
     />
     <ImageView
-            android:layout_width="23dp"
-            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
             app:srcCompat="@drawable/ic_chevron_left_black_24dp"
             android:id="@+id/imageView"
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
             android:layout_marginEnd="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
     <ImageView
-            android:layout_width="23dp"
-            android:layout_height="35dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
             app:srcCompat="@drawable/ic_chevron_right_black_24dp"
             android:id="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent"
