@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">UniverseSearch</string>
+    <string name="universe_search">Universe Search</string>
+    <string name="version">Version:1.0.0</string>
 </resources>
