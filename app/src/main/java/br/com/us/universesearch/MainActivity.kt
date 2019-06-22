@@ -79,14 +79,6 @@ class MainActivity : AppCompatActivity() {
 
 
             }
-
-       
-
-
-
-        button_back.isEnabled = webUniverse.canGoBack()
-        button_forward.isEnabled = webUniverse.canGoForward()
-
         button_back.setOnClickListener{
             webUniverse.goBack()
         }
