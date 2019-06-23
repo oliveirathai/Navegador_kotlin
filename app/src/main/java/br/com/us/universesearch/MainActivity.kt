@@ -1,18 +1,26 @@
 package br.com.us.universesearch
 
+import android.app.DownloadManager
+import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
-import android.webkit.WebChromeClient
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
 //import android.view.View
-import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.activity_main.*
+import android.graphics.Bitmap
+import android.net.Uri
+import android.os.Environment
+import android.support.v7.app.AlertDialog
+import android.webkit.*
+
+//import android.R
+
+
 //import android.webkit.WebViewClient
 
 
@@ -35,6 +43,9 @@ class MainActivity : AppCompatActivity() {
         webUniverse.settings.displayZoomControls = false
         webUniverse.webViewClient = WebViewClient()
 
+//        val webview= WebView(this)
+//        setContentView(webview)
+
 
 
             btn_ir.setOnClickListener {
@@ -43,16 +54,30 @@ class MainActivity : AppCompatActivity() {
                 progressBar.progress = 0
 
 
+
                 //start animacao btn
                 btn_ir?.playAnimation()
-                urlLoad = "http://" + edt_url.editableText.toString().trim()
-    //            Log.d("urlLoad", urlLoad)
+                urlLoad = "https://" + edt_url.editableText.toString().trim()
 //                webUniverse.loadUrl(urlLoad)
-//                Log.d("load", webUniverse.progress.toString())
+//
+//                webUniverse.webChromeClient = object : WebChromeClient() {
+//                    override fun onProgressChanged(view: WebView?, newProgress: Int) {
+//                        //it calls when progress changed
+//                        progressBar.progress = newProgress
+//                        super.onProgressChanged(view, newProgress)
+//
+//                        if (newProgress == 100) {
+//                            //if progress completes, progressbar gets hidden
+//                            progressBar.visibility = progressBar.visibility
+//                        }
+//
+//                    }
+//                }
+
 
                 val handler: Handler = Handler()
 
-                // comeco progressbar
+//                 comeco progressbar
                 Thread(Runnable {
                     while (progressStatus < 100)
                         progressStatus += 1
@@ -68,6 +93,7 @@ class MainActivity : AppCompatActivity() {
                         //mostra Progressbar
                         progressBar.visibility = ProgressBar.VISIBLE
                         webUniverse.loadUrl(urlLoad)
+                        Log.d("url", webUniverse.loadUrl(urlLoad).toString())
 
                         //cancela animacao btn
                         if (progressBar.progress == 100){
@@ -79,6 +105,8 @@ class MainActivity : AppCompatActivity() {
 
 
             }
+
+
         button_back.setOnClickListener{
             webUniverse.goBack()
         }

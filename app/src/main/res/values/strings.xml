@@ -2,4 +2,5 @@
     <string name="app_name">UniverseSearch</string>
     <string name="universe_search">Universe Search</string>
     <string name="version">Version:1.0.0</string>
+    <string name="digite_a_url_do_site">Digite a url do site</string>
 </resources>

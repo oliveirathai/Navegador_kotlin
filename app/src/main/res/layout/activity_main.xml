@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
+        android:id="@+id/toolbar"
         tools:context=".MainActivity">
 
 
@@ -16,10 +17,10 @@
             android:ems="10"
             android:id="@+id/edt_url" android:layout_marginTop="10dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toStartOf="@+id/btn_ir"
             app:layout_constraintBottom_toTopOf="@+id/progressBar"
-    />
+            android:hint="@string/digite_a_url_do_site"/>
     <!--<Button-->
             <!--android:text="IR"-->
             <!--android:layout_width="45dp"-->
@@ -59,35 +60,39 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp" android:layout_marginTop="10dp" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="10dp" app:layout_constraintBottom_toTopOf="@+id/progressBar"/>
-    <ProgressBar
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:id="@+id/progressBar" android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/webUniverse" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="10dp"
-    />
+
     <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             app:srcCompat="@drawable/ic_domain"
             android:id="@+id/imageView" app:layout_constraintEnd_toStartOf="@+id/edt_url"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginTop="10dp" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="28dp"
             android:layout_marginBottom="10dp" app:layout_constraintBottom_toTopOf="@+id/progressBar"/>
 
 
-    <WebView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/webUniverse" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/progressBar"
-    />
+        <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:id="@+id/progressBar" android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/webUniverse" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="10dp"
+        />
+
+
+        <WebView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/webUniverse" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/progressBar"
+                app:layout_constraintHorizontal_bias="0.0"/>
 
 
 
