@@ -73,13 +73,14 @@ class MainActivity : AppCompatActivity() {
                         if (url.startsWith("http://")) {
                             urlLoad = url.replace("http://", "https://")
                             edt_url.setText(urlLoad, TextView.BufferType.EDITABLE)
+                            progressBar.visibility = ProgressBar.INVISIBLE
                             Log.d(logTag, "onReceivedHttpError(Reload HTTPS: $urlLoad, ERROR_CONNECT: ${ERROR_CONNECT}) ")
-
                             webUniverse.loadUrl(urlLoad)
                         }
                         if (url.startsWith("https://")) {
                             urlLoad = url.replace("https://", "http://")
                             edt_url.setText(urlLoad, TextView.BufferType.EDITABLE)
+                            progressBar.visibility = ProgressBar.INVISIBLE
                             Log.d(logTag, "onReceivedHttpError(Reload HTTP: $urlLoad, ERROR_CONNECT: ${ERROR_CONNECT}) ")
                             webUniverse.loadUrl(urlLoad)
                         }
@@ -130,6 +131,7 @@ class MainActivity : AppCompatActivity() {
 
                     //cancela animacao btn
                     if (progressBar.progress == 100) {
+//                        progressBar.visibility = ProgressBar.INVISIBLE
                         btn_ir?.cancelAnimation()
                     }
 
