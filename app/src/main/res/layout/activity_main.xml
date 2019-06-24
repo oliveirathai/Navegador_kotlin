@@ -13,7 +13,7 @@
     <EditText
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:inputType="textPersonName"
+            android:inputType="textUri"
             android:ems="10"
             android:id="@+id/edt_url" android:layout_marginTop="10dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -22,13 +22,13 @@
             app:layout_constraintBottom_toTopOf="@+id/progressBar"
             android:hint="@string/digite_a_url_do_site"/>
     <!--<Button-->
-            <!--android:text="IR"-->
-            <!--android:layout_width="45dp"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:id="@+id/btn_ir"-->
-            <!--app:layout_constraintEnd_toStartOf="@+id/button_back"-->
-            <!--android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"-->
-            <!--android:layout_marginEnd="16dp"/>-->
+    <!--android:text="IR"-->
+    <!--android:layout_width="45dp"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:id="@+id/btn_ir"-->
+    <!--app:layout_constraintEnd_toStartOf="@+id/button_back"-->
+    <!--android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"-->
+    <!--android:layout_marginEnd="16dp"/>-->
 
     <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/btn_ir"
@@ -72,28 +72,28 @@
             android:layout_marginBottom="10dp" app:layout_constraintBottom_toTopOf="@+id/progressBar"/>
 
 
-        <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_gravity="center"
-                android:id="@+id/progressBar" android:layout_marginBottom="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/webUniverse" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="10dp"
-        />
+    <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:id="@+id/progressBar" android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/webUniverse" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="10dp"
+    />
 
 
-        <WebView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:id="@+id/webUniverse" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="@id/progressBar"
-                app:layout_constraintHorizontal_bias="0.0"/>
-
+    <WebView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/webUniverse"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/progressBar"
+            app:layout_constraintHorizontal_bias="0.0"/>
 
 
 </android.support.constraint.ConstraintLayout>

@@ -14,9 +14,12 @@ import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.activity_main.*
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
+import android.support.annotation.RequiresApi
 import android.support.v7.app.AlertDialog
 import android.webkit.*
+import android.widget.TextView
 
 //import android.R
 
@@ -24,9 +27,8 @@ import android.webkit.*
 //import android.webkit.WebViewClient
 
 
-
-
 class MainActivity : AppCompatActivity() {
+    private val logTag = "MainActivity"
 
     lateinit var animation: LottieAnimationView
     lateinit var webClient: WebChromeClient
@@ -41,73 +43,105 @@ class MainActivity : AppCompatActivity() {
         webUniverse.settings.setSupportZoom(true)
         webUniverse.settings.builtInZoomControls = true
         webUniverse.settings.displayZoomControls = false
-        webUniverse.webViewClient = WebViewClient()
 
 //        val webview= WebView(this)
 //        setContentView(webview)
 
+        webUniverse.webViewClient = object : WebViewClient() {
 
+            override fun onReceivedHttpError(
+                view: WebView?,
+                request: WebResourceRequest?,
+                errorResponse: WebResourceResponse?
+            ) {
+                Log.d(logTag, "onReceivedHttpError(view: $view, request: $request, errorResponse: $errorResponse) ")
 
-            btn_ir.setOnClickListener {
-                var progressBar = progressBar
-                var progressStatus = webUniverse.progress
-                progressBar.progress = 0
-
-
-
-                //start animacao btn
-                btn_ir?.playAnimation()
-                urlLoad = "https://" + edt_url.editableText.toString().trim()
-//                webUniverse.loadUrl(urlLoad)
-//
-//                webUniverse.webChromeClient = object : WebChromeClient() {
-//                    override fun onProgressChanged(view: WebView?, newProgress: Int) {
-//                        //it calls when progress changed
-//                        progressBar.progress = newProgress
-//                        super.onProgressChanged(view, newProgress)
-//
-//                        if (newProgress == 100) {
-//                            //if progress completes, progressbar gets hidden
-//                            progressBar.visibility = progressBar.visibility
-//                        }
-//
-//                    }
-//                }
-
-
-                val handler: Handler = Handler()
-
-//                 comeco progressbar
-                Thread(Runnable {
-                    while (progressStatus < 100)
-                        progressStatus += 1
-                    //delay progressbar
-                        try {
-                            Thread.sleep(2000)
-                        } catch (e: InterruptedException) {
-                            e.printStackTrace()
-                        }
-
-                    handler.post(Runnable {
-                        progressBar.progress = progressStatus
-                        //mostra Progressbar
-                        progressBar.visibility = ProgressBar.VISIBLE
-                        webUniverse.loadUrl(urlLoad)
-                        Log.d("url", webUniverse.loadUrl(urlLoad).toString())
-
-                        //cancela animacao btn
-                        if (progressBar.progress == 100){
-                            btn_ir?.cancelAnimation()
-                        }
-
-                    })
-                }).start()
-
-
+                super.onReceivedHttpError(view, request, errorResponse)
             }
 
+            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+                Log.d(logTag, "onReceivedHttpError(request: $request, error: $error) ")
+                Log.d(logTag, "onReceivedHttpError(url: ${request?.url}, code: ${error?.errorCode}) ")
+                Log.d(logTag, "onReceivedHttpError(method: ${request?.method}, description: ${error?.description}) ")
+                Log.d(logTag, "onReceivedHttpError(method: ${request?.method}, ERROR_CONNECT: ${ERROR_CONNECT}) ")
 
-        button_back.setOnClickListener{
+                when (error?.errorCode) {
+                    ERROR_CONNECT -> {
+                        val url = request?.url?.toString()?: ""
+                        Log.d(logTag, "onReceivedHttpError(url: $url, ERROR_CONNECT: ${ERROR_CONNECT}) ")
+
+                        if (url.startsWith("http://")) {
+                            urlLoad = url.replace("http://", "https://")
+                            edt_url.setText(urlLoad, TextView.BufferType.EDITABLE)
+                            Log.d(logTag, "onReceivedHttpError(Reload HTTPS: $urlLoad, ERROR_CONNECT: ${ERROR_CONNECT}) ")
+
+                            webUniverse.loadUrl(urlLoad)
+                        }
+                        if (url.startsWith("https://")) {
+                            urlLoad = url.replace("https://", "http://")
+                            edt_url.setText(urlLoad, TextView.BufferType.EDITABLE)
+                            Log.d(logTag, "onReceivedHttpError(Reload HTTP: $urlLoad, ERROR_CONNECT: ${ERROR_CONNECT}) ")
+                            webUniverse.loadUrl(urlLoad)
+                        }
+                    }
+                }
+
+                super.onReceivedError(view, request, error)
+            }
+
+        }
+
+        btn_ir.setOnClickListener {
+            var progressBar = progressBar
+            var progressStatus = webUniverse.progress
+            progressBar.progress = 0
+            urlLoad = edt_url.editableText.toString().trim()
+
+
+            //start animacao btn
+            btn_ir?.playAnimation()
+            if (!urlLoad.startsWith("https://") && !urlLoad.startsWith("http://")) {
+                urlLoad = "http://$urlLoad"
+            }
+//                webUniverse.loadUrl(urlLoad)
+//
+
+
+//
+            val handler = Handler()
+
+//                 comeco progressbar
+            Thread(Runnable {
+                while (progressStatus < 100)
+                    progressStatus += 1
+                //delay progressbar
+                try {
+                    Thread.sleep(2000)
+                } catch (e: InterruptedException) {
+                    e.printStackTrace()
+                }
+
+                handler.post {
+                    progressBar.progress = progressStatus
+                    //mostra Progressbar
+                    progressBar.visibility = ProgressBar.VISIBLE
+                    webUniverse.loadUrl(urlLoad)
+                    Log.d(logTag, "StartLoad: $urlLoad")
+
+                    //cancela animacao btn
+                    if (progressBar.progress == 100) {
+                        btn_ir?.cancelAnimation()
+                    }
+
+                }
+            }).start()
+
+
+        }
+
+
+
+        button_back.setOnClickListener {
             webUniverse.goBack()
         }
         button_forward.setOnClickListener {
